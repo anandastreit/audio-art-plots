@@ -1,8 +1,11 @@
 # audio-art-plots
 
-This project targets artists and data analysts who like and insist on creating artistic plots, even when the underlying data is pokey. 
-The aim is to represent data and its hidden patterns in an interesting and understandable way that appeals to the viewer's feelings.
+## About
+This project targets artists and data analysts who play with creativity when generating plots, even when the underlying data is limited. The aim is to represent data and its hidden patterns in an interesting and understandable way that appeals to the viewer's feelings.
 
-In this first step, possibilities of shapes and colors in audio data spectrograms are experimented by changing a few and simple parameters, such as sampling rate and color maps. The result of these experiments has already generated pictures like the one in the image below.
+## Current state
+In this first version, possibilities of shapes and colors in audio data spectrograms are experimented by changing a few and simple parameters, such as sampling rate and color maps. The result of these experiments has already generated artworks like the one in the image below.
 
-![athena-pic](https://github.com/anandastreit/audio-art-plots/blob/main/etc/athena.jpg)
+<p align="center">
+  <img src="https://github.com/anandastreit/audio-art-plots/blob/main/etc/athena.jpg" width="350" title="athena-pic">
+</p>
