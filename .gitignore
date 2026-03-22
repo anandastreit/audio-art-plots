@@ -92,7 +92,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-baby.ipynb
+projects/
 
 # IPython
 profile_default/

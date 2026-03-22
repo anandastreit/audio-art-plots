@@ -13,9 +13,27 @@ class Audio:
         self.name = os.path.splitext(os.path.basename(input_path))[0]
         self.plot = AudioPlot(self)
 
-    def load(self):
+    def load(self, mono='avg'):
+        """
+        mono options:
+          'avg'        - average L+R channels (standard mono)
+          'left'       - left channel only
+          'right'      - right channel only
+          'interleave' - interleave L and R samples [L0,R0,L1,R1,...] (produces unique visual artifacts)
+        """
+        samples, self.sample_rate = librosa.load(self.input_path, sr=None, mono=False)
 
-        self.samples, self.sample_rate = librosa.load(self.input_path, sr=None, mono=True)
+        if samples.ndim == 1:
+            self.samples = samples
+        elif mono == 'avg':
+            self.samples = samples.mean(axis=0)
+        elif mono == 'left':
+            self.samples = samples[0]
+        elif mono == 'right':
+            self.samples = samples[1]
+        elif mono == 'interleave':
+            self.samples = samples.T  # keep as (N, 2) — stft flattens it via np.append, replicating old scipy behavior
+
         print(f"Audio file loaded, sample rate: {self.sample_rate}")
 
     def resample(self, sample_rate): # number_of_samples=300000):
