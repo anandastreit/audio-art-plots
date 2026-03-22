@@ -1,6 +1,6 @@
 import os
 import numpy as np
-import scipy.io.wavfile as wav
+import librosa
 from scipy import signal
 from audio_plotters import *
 from signal_transform import *
@@ -15,7 +15,7 @@ class Audio:
 
     def load(self):
 
-        self.sample_rate, self.samples = wav.read(self.input_path)
+        self.samples, self.sample_rate = librosa.load(self.input_path, sr=None, mono=True)
         print(f"Audio file loaded, sample rate: {self.sample_rate}")
 
     def resample(self, sample_rate): # number_of_samples=300000):
@@ -29,7 +29,7 @@ class Audio:
 
         return audio_resampled
 
-    def make_spectogram(self, bin_size=2**10, factor_logscale=1.0):
+    def make_spectrogram(self, bin_size=2**10, factor_logscale=1.0):
 
         spec = stft(self.samples, bin_size)
         spec, freq = logscale_spec(spec, factor=factor_logscale, sr=self.sample_rate)
@@ -39,13 +39,13 @@ class Audio:
         print("time bins: ", time_bins)
         print("freq bins: ", freq_bins)
 
-        spectogram = Spectogram(self.name, spec, freq)
-        return spectogram
+        spectrogram = Spectrogram(self.name, spec, freq)
+        return spectrogram
 
-class Spectogram():
+class Spectrogram():
 
-    def __init__(self, name=None, spectogram=None, frequencies=None):
+    def __init__(self, name=None, spectrogram=None, frequencies=None):
         self.name = name
-        self.spectogram = spectogram
+        self.spectrogram = spectrogram
         self.frequencies = frequencies
-        self.plot = SpectogramPlot(self)
+        self.plot = SpectrogramPlot(self)
