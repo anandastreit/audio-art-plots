@@ -29,9 +29,9 @@ class Audio:
 
         return audio_resampled
 
-    def make_spectrogram(self, bin_size=2**10, factor_logscale=1.0):
+    def make_spectrogram(self, n_fft=2**10, factor_logscale=1.0):
 
-        spec = stft(self.samples, bin_size)
+        spec = stft(self.samples, n_fft)
         spec, freq = logscale_spec(spec, factor=factor_logscale, sr=self.sample_rate)
         spec = 20.*np.log10(np.abs(spec)/10e-6) # amplitude to decibel
 
